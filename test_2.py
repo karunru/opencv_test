@@ -1,7 +1,21 @@
-import numpy as np
 import cv2
+import sys
+ 
+argvs = sys.argv
+if (len(argvs) != 2):
+	 print("Usage: $ python %s filename" % argvs[0])
+	 quit()
+  
+imagefilename = argvs[1]
+try:
+	img = cv2.imread(imagefilename, 1)
+except:
+	print("faild to load %s" % imagefilename)
+quit()
 
-img = cv2.imread('test.png',0)
-img_gray = cv2.cvtColor(img, cv2.cv.CV_BGR2GRAY)
-cv2.imwrite("detected.jpg", img_gray)
-#cv2.imwrite("detected.jpg", img)
+# view image
+windowName = 'LoadImage'
+cv2.imshow( windowName, img)
+print("press any key to exit.")
+
+cv2.waitKey(0)
